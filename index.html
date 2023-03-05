@@ -6,39 +6,51 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- <link rel="stylesheet" href="./assets/css/style.css" /> -->
+    <link rel="stylesheet" href="./assets/css/style.css" />
     <title>Weather Dashboard</title>
 </head>
 
 <body class="overflow-hidden">
     <header class="container mt-4 mb-2 mx-auto pt-4 h-20 bg-gradient-to-r 
                    from-indigo-500 to-violet-900 weatherDashboard">
-        <h1 class="text-4xl font-bold text-center text-slate-200">Weather Dashboard</h1>
+        <h1 class="text-4xl font-bold text-center text-slate-200">
+            Weather Dashboard</h1>
     </header>
     <main class="min-h-screen container mx-auto grid grid-flow-col">
         <container class="">
             <div class="text-center searchCity">
-                <h2 class="pb-3 text-3xl font-bold text-left">Search for a City:</h2>
-                <input class="border-2 border-slate-400 rounded w-64"></input></br>
-                <button class="mt-3 bg-blue-400 text-slate-300 rounded w-64">Search</button>
+                <h2 class="pb-3 text-3xl font-bold text-left">
+                    Search for a City:</h2>
+                <input id="cityInput" class="border-2 border-slate-400 rounded w-64"
+                    placeholder="Enter city here"></br>
+                <button class="mt-3 bg-blue-400 text-slate-300 rounded w-64 
+                    searchBtn">Search</button>
             </div>
             <div class="border-b-2 border-slate-600 my-3 mx-auto w-64"></div>
-            <div class="min-h-screen searchHistory">
-                <h2>(Search History)</h2>
+            <div class="min-h-screen">
+                <ul class="searchList"></ul>
             </div>
         </container>
         <container class="col-span-3">
-            <div class="h-48 border-2 border-slate-600 currentDay">
-                <h2 class="ml-2 -mb-2 text-3xl font-bold">City (MM/DD/YYYY) &#x1F324</h2></br>
+            <div class="h-48 border-2 border-slate-600">
+                <h3 id="currentDay" class="ml-2 -mb-2 text-3xl font-bold">
+                    City (MM/DD/YYYY) &#x1F324</h3></br>
                 <p class="ml-2 temp">Temp:</p></br>
                 <p class="ml-2 wind">Wind:</p></br>
                 <p class="ml-2 humidity">Humidty:</p>
             </div>
-            <div class="min-h-screen fiveDay">
+            <div class="min-h-screen">
                 <h3 class="mt-3 text-2xl font-bold">5-Day Forecast:</h3>
+                <div class="fiveDay"></div>
             </div>
         </container>
     </main>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/dayjs@1.11.3/dayjs.min.js"
+      integrity="sha256-iu/zLUB+QgISXBLCW/mcDi/rnf4m4uEDO0wauy76x7U="
+      crossorigin="anonymous"
+    ></script>
     <script src="./assets/js/script.js"></script>
 </body>
 
