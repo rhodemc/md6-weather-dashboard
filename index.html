@@ -28,16 +28,16 @@
             </div>
             <div class="border-b-2 border-slate-600 my-3 mx-auto w-64"></div>
             <div class="min-h-screen">
-                <ul class="searchList"></ul>
+                <ul id="searchHistory"></ul>
+                    <li class="list-none searchHistoryItem"></li>
             </div>
         </container>
         <container class="col-span-3">
             <div class="h-48 border-2 border-slate-600">
-                <h3 id="currentDay" class="ml-2 -mb-2 text-3xl font-bold">
-                    City (MM/DD/YYYY) &#x1F324</h3></br>
-                <p class="ml-2 temp">Temp:</p></br>
-                <p class="ml-2 wind">Wind:</p></br>
-                <p class="ml-2 humidity">Humidty:</p>
+                <h2 id="currentDay" class="ml-2 -mb-2 text-3xl font-bold">City (MM/DD/YYYY)</h2></br>
+                <p id="temp" class="ml-2">Temp:</p></br>
+                <p id="wind" class="ml-2">Wind:</p></br>
+                <p id="humidity" class="ml-2">Humidity:</p>
             </div>
             <div class="min-h-screen">
                 <h3 class="mt-3 text-2xl font-bold">5-Day Forecast:</h3>
