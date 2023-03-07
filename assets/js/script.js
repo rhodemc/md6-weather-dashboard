@@ -43,10 +43,6 @@ function searchOpenWeatherApi(cityInput) {
     })
     .then(function (locWeatherResults) {
       console.log(locWeatherResults);
-      //   let iconCode = locWeatherResults.weather[0].icon;
-      //   let iconUrl = `<img src="https://openweathermap.org/img/w/${iconCode}.png" alt="${locWeatherResults.list[i].weather[0].description}" />`;
-
-      //   //   let iconUrl = `https://openweathermap.org/img/w/${iconCode}.png`;
 
       let currentDayEl = document.querySelector("#currentDay");
       let tempEl = document.querySelector("#temp");
