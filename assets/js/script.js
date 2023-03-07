@@ -48,7 +48,9 @@ function searchOpenWeatherApi(cityInput) {
     .then(function (locWeatherResults) {
       console.log(locWeatherResults);
       //   let iconCode = locWeatherResults.weather[0].icon;
-      //   let iconUrl = `https://openweathermap.org/img/w/${iconCode}.png`;
+      //   let iconUrl = `<img src="https://openweathermap.org/img/w/${iconCode}.png" alt="${locWeatherResults.list[i].weather[0].description}" />`;
+
+      //   //   let iconUrl = `https://openweathermap.org/img/w/${iconCode}.png`;
 
       let tempEl = document.querySelector("#temp");
       let windEl = document.querySelector("#wind");
@@ -67,7 +69,7 @@ function getUrl(path, cityInput) {
 }
 
 // five day forecast
-function fiveDayForecast(cityInput) {
+function fiveDayForecast(cityInput, forecastResults) {
   let forecastUrl = getUrl("forecast", cityInput);
 
   fetch(forecastUrl)
@@ -80,6 +82,30 @@ function fiveDayForecast(cityInput) {
     })
     .then(function (forecastResults) {
       console.log(forecastResults);
+      $(".fiveDay").empty();
+
+      for (let i = 0; i < 5; i++) {
+        // if (item.dt_text.indexOf("12:00:00")
+        // !==-1) {}
+        let cityData = {
+          date: forecastResults.list[i].date,
+          icon: forecastResults.list[i].weather[0].icon,
+          temp: forecastResults.list[i].main.temp,
+          humidity: forecastResults.list[i].main.humidity,
+        };
+
+        let forecastDate = dayjs(cityData.date).format("MM/DD/YYYY");
+        let iconUrl = `<img src="https://openweathermap.org/img/w/${cityData.icon}.png" alt="${forecastResults.list[i].weather[0].description}" />`;
+
+        let forecastCard = $(`
+            <div class="mx-auto mt-2 border-2 w-32">
+                <h4>${forecastDate}</h4>
+                <p>${iconUrl}</p>
+                <p>Temp: ${cityData.temp} *F</p>
+                <p>Humidity: ${cityData.humidity}\%</p>
+        `);
+        $(".fiveDay").append(forecastCard);
+      }
     });
 }
 
@@ -103,7 +129,7 @@ $(document).ready(function () {
 
     searchHistoryArr.forEach(function (savedCity) {
       let searchedCity = $(`
-      <li class = "SearchHistoryItem">${savedCity}</li>
+      <button class = "border-2 w-64 mb-2 rounded border-slate-600 searchHistoryItem">${savedCity}</button></br>
       `);
       $("#searchHistory").append(searchedCity);
     });
