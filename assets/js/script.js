@@ -1,9 +1,5 @@
 const openWeatherApiKey = "a55e288f2369d40b8ca8752af6111df3";
 
-const currentDayEl = document.querySelector("#currentDay");
-
-let currentDayIcon = document.querySelector("#weatherIcon");
-
 let today = dayjs().format("MM/DD/YYYY");
 let searchHistoryList = [];
 
@@ -21,7 +17,7 @@ $(".searchBtn").on("click", function (event) {
   if (!searchHistoryList.includes(cityInput)) {
     searchHistoryList.push(cityInput);
     let searchedCity = $(`
-      <li class = "SearchHistoryItem">${cityInput}</li>
+      <button class = "border-2 w-64 h-10 rounded border-slate-600 bg-slate-200 text-center searchHistoryItem">${cityInput}</button></br>
       `);
     $("#searchHistory").append(searchedCity);
   }
@@ -52,6 +48,7 @@ function searchOpenWeatherApi(cityInput) {
 
       //   //   let iconUrl = `https://openweathermap.org/img/w/${iconCode}.png`;
 
+      let currentDayEl = document.querySelector("#currentDay");
       let tempEl = document.querySelector("#temp");
       let windEl = document.querySelector("#wind");
       let humidityEl = document.querySelector("#humidity");
@@ -84,13 +81,12 @@ function fiveDayForecast(cityInput, forecastResults) {
       console.log(forecastResults);
       $(".fiveDay").empty();
 
-      for (let i = 0; i < 5; i++) {
-        // if (item.dt_text.indexOf("12:00:00")
-        // !==-1) {}
+      for (let i = 0; i < forecastResults.list.length; i = i + 8) {
         let cityData = {
-          date: forecastResults.list[i].date,
+          date: forecastResults.list[i].dt_txt,
           icon: forecastResults.list[i].weather[0].icon,
           temp: forecastResults.list[i].main.temp,
+          wind: forecastResults.list[i].wind.speed,
           humidity: forecastResults.list[i].main.humidity,
         };
 
@@ -98,11 +94,12 @@ function fiveDayForecast(cityInput, forecastResults) {
         let iconUrl = `<img src="https://openweathermap.org/img/w/${cityData.icon}.png" alt="${forecastResults.list[i].weather[0].description}" />`;
 
         let forecastCard = $(`
-            <div class="mx-auto mt-2 border-2 w-32">
-                <h4>${forecastDate}</h4>
-                <p>${iconUrl}</p>
-                <p>Temp: ${cityData.temp} *F</p>
-                <p>Humidity: ${cityData.humidity}\%</p>
+            <div class="mx-auto mt-2 rounded w-36 h-48 bg-blue-400 text-slate-200">
+                <h4 class="pl-1 my-1">${forecastDate}</h4>
+                <p class="pl-1 mb-2">${iconUrl}</p>
+                <p class="pl-1 mb-2">Temp: ${cityData.temp} *F</p>
+                <p class="pl-1 mb-2">Wind: ${cityData.wind} MPH</p>
+                <p class="pl-1 mb-2">Humidity: ${cityData.humidity}\%</p>
         `);
         $(".fiveDay").append(forecastCard);
       }
@@ -113,6 +110,7 @@ function fiveDayForecast(cityInput, forecastResults) {
 $(document).on("click", ".searchHistoryItem", function () {
   let cityList = $(this).text();
   searchOpenWeatherApi(cityList);
+  fiveDayForecast(cityList);
 });
 
 // on reload, loads last city searched
@@ -129,7 +127,7 @@ $(document).ready(function () {
 
     searchHistoryArr.forEach(function (savedCity) {
       let searchedCity = $(`
-      <button class = "border-2 w-64 mb-2 rounded border-slate-600 searchHistoryItem">${savedCity}</button></br>
+      <button class = "border-2 w-64 h-10 rounded border-slate-600 bg-slate-200 searchHistoryItem">${savedCity}</button></br>
       `);
       $("#searchHistory").append(searchedCity);
     });

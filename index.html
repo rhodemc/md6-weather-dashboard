@@ -6,7 +6,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="./assets/css/style.css" />
     <title>Weather Dashboard</title>
 </head>
 
@@ -22,17 +21,16 @@
                 <h2 class="pb-3 text-3xl font-bold text-left">
                     Search for a City:</h2>
                 <input id="cityInput" class="border-2 border-slate-400 rounded w-64"
-                    placeholder="Enter city here"></br>
-                <button class="mt-3 bg-blue-400 text-slate-300 rounded w-64 
+                    placeholder=" Enter city here"></br>
+                <button class="mt-3 bg-blue-400 text-slate-200 rounded w-64 
                     searchBtn">Search</button>
             </div>
-            <div class="border-b-2 border-slate-600 my-3 mx-auto w-64"></div>
-            <div class="min-h-screen">
-                <ul id="searchHistory" class="mx-auto ml-6"></ul>
-                    <li class="list-none searchHistoryItem"></li>
+            <div class="border-b-2 border-slate-600 my-3 mx-auto w-64"></div> 
+            <div id="searchHistory" class="min-h-screen flex flex-col items-center">
+                    <button class="list-none searchHistoryItem"></button>
             </div>
         </container>
-        <container class="col-span-3">
+        <container class="col-span-3 ml-2">
             <div class="h-48 border-2 border-slate-600">
                 <h2 id="currentDay" class="ml-2 -mb-2 text-3xl font-bold">City (MM/DD/YYYY)</h2></br>
                 <p id="temp" class="ml-2">Temp:</p></br>
@@ -41,7 +39,7 @@
             </div>
             <div class="min-h-screen">
                 <h3 class="mt-3 text-2xl font-bold">5-Day Forecast:</h3>
-                <div class="flex bg-red-400 fiveDay"></div>
+                <div class="flex fiveDay"></div>
             </div>
         </container>
     </main>
