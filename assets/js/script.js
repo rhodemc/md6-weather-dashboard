@@ -56,7 +56,7 @@ function searchOpenWeatherApi(cityInput) {
 }
 
 function getUrl(path, cityInput) {
-  let baseUrl = `http://api.openweathermap.org/data/2.5/${path}`;
+  let baseUrl = `https://api.openweathermap.org/data/2.5/${path}`;
   let fullUrl = baseUrl + "?q=" + cityInput.replace(/\s/g, "%20") + "&units=imperial&appid=" + openWeatherApiKey;
   return fullUrl;
 }
